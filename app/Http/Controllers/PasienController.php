@@ -112,4 +112,14 @@ class PasienController extends Controller
             ->with('type','success');
 
     }
+
+    public function getJadwal($poli_id)
+    {
+        $jadwals = JadwalPeriksa::whereHas('dokter', function($query) use($poli_id) {
+            $query->where('id_poli', $poli_id);
+        })->with('dokter.poli')->get();
+        
+    return response()->json($jadwals);
+    }
+
 }

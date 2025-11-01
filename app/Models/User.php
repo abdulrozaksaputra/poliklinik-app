@@ -61,4 +61,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if ($user->role === 'pasien') {
+                $latest = User::where('role', 'pasien')
+                            ->whereNotNull('no_rm')
+                            ->latest('id')
+                            ->first();
+
+                $nextNumber = $latest ? intval(substr($latest->no_rm, -3)) + 1 : 1;
+                $user->no_rm = date('Ym') . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            }
+        });
+    }
 }
