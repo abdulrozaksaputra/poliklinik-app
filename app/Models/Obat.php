@@ -14,7 +14,17 @@ class Obat extends Model
         'nama_obat',
         'kemasan',
         'harga',
+        'stok',
     ];
+
+     public function kurangiStok($jumlah = 1)
+    {
+        if ($this->stok >= $jumlah) {
+            $this->decrement('stok', $jumlah);
+            return true;
+        }
+        return false; // Stok tidak cukup
+    }
 
     public function detailPeriksas()
     {

@@ -12,8 +12,11 @@ class ObatController extends Controller
      */
     public function index()
     {
-         $obats = Obat::all();
-        return view('admin.obat.index', compact('obats'));
+        $obats = Obat::all();
+        $obatsMenunipis = Obat::whereBetween('stok', [1, 5])->get();
+        $obatsHabis = Obat::where('stok', 0)->get();
+    
+        return view('admin.obat.index', compact('obats', 'obatsMenunipis', 'obatsHabis'));
     }
 
     /**
@@ -33,12 +36,14 @@ class ObatController extends Controller
             'nama_obat' => 'required|string',
             'kemasan' => 'required|string',
             'harga' => 'required|integer',
+            'stok' => 'required|integer|min:0',
         ]);
 
         Obat::create([
             'nama_obat' => $request->nama_obat,
             'kemasan' => $request->kemasan,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'stok' => $request->stok,
         ]);
 
         return redirect()->route('obat.index')
@@ -72,13 +77,15 @@ class ObatController extends Controller
             'nama_obat' => 'required|string',
             'kemasan' => 'nullable|string',
             'harga' => 'required|integer',
+            'stok' => 'required|integer|min:0',
         ]);
 
         $obat = Obat::findOrFail($id);
         $obat->update([
             'nama_obat' => $request->nama_obat,
             'kemasan' => $request->kemasan,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'stok' => $request->stok,
         ]);
 
         return redirect()->route('obat.index')

@@ -14,8 +14,8 @@ class PoliController extends Controller
      */
     public function index()
     {
-        $polis = Poli::all();
-        return view('admin.polis.index', compact('polis'));
+        $polis = Poli::all(); // mengambil semua data poli dari database
+        return view('admin.polis.index', compact('polis')); // menampilkan view dengan data poli
     }
 
     /**
@@ -23,7 +23,7 @@ class PoliController extends Controller
      */
     public function create()
     {
-        return view('admin.polis.create');
+        return view('admin.polis.create'); // menampilkan form pembuatan poli baru
     }
 
     /**
@@ -31,28 +31,28 @@ class PoliController extends Controller
      */
     public function store(Request $request)
     {
+        // memvalidasi data inputan
         $validated = $request->validate([
             'nama_poli' => 'required',
             'keterangan' => 'nullable',
         ]);
 
+        // menyimpan data ke database
         Poli::create($validated);
+
+        // redirect ke halaman index dengan pesan sukses
         return redirect()->route('polis.index')
         ->with('success', 'Poli berhasil di tambahkan')
         ->with('type', 'success');
     }
 
     /**
-     * Display the specified resource.
-     */
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        $poli = Poli::findOrFail($id);
-        return view('admin.polis.edit', compact('poli'));
+        $poli = Poli::findOrFail($id); // mencari poli berdasarkan id
+        return view('admin.polis.edit', compact('poli')); // menampilkan form edit dengan data poli
     }
 
     /**
@@ -60,13 +60,17 @@ class PoliController extends Controller
      */
     public function update(Request $request, $id)
     {
-          $validated = $request->validate([
+        // memvalidasi data input sama seperti store
+        $validated = $request->validate([
             'nama_poli' => 'required',
             'keterangan' => 'nullable',
         ]);
 
+        // mencari poli berdasarkan id dan mengupdate datanya
         $poli = Poli::findOrFail($id);
         $poli->update($validated);
+
+        // redirect ke halaman index dengan pesan sukses
         return redirect()->route('polis.index')->with('success', 'Polis berhasil di update');
     }
 
@@ -75,6 +79,7 @@ class PoliController extends Controller
      */
     public function destroy($id)
     {
+        // mencari data berdasarkan id dan menghapusnya
         $poli = Poli::findOrFail($id);
         $poli->delete();
         return redirect()->route('polis.index')->with('success', 'Poli Berhasil di hapus !');

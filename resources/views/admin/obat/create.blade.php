@@ -9,6 +9,7 @@
                         <form action="{{ route ('obat.store') }}" method="POST">
                             @csrf
 
+                            <!-- Row 1: Nama Obat & Kemasan -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
@@ -21,20 +22,36 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="kemasan" class="form-label">Kemasan</label>
+                                        <label for="kemasan" class="form-label">Kemasan <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="kemasan" id="kemasan"
-                                            class="form-control" placeholder="Contoh: Strip, Botol, Tube">
+                                            class="form-control" placeholder="Contoh: Strip, Botol, Tube" value="{{ old('kemasan') }}" required>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="harga" class="form-label">Harga <span
-                                        class="text-danger">*</span></label>
-                                <input type="number" name="harga" id="harga"
-                                    class="form-control" min="0" step="1" required>
+                            <!-- Row 2: Harga & Stok -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="harga" class="form-label">Harga <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" name="harga" id="harga"
+                                            class="form-control" min="0" step="1" value="{{ old('harga') }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="stok" class="form-label">Stok <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" name="stok" id="stok"
+                                            class="form-control" min="0" step="1" value="{{ old('stok', 0) }}" required>
+                                    </div>
+                                </div>
                             </div>
 
+                            <!-- Buttons -->
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Simpan

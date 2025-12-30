@@ -79,14 +79,23 @@
                 <p>Dashboard Dokter</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="{{ route('jadwal-periksa.index') }}" class="nav-link {{ request()->routeIs('jadwal-periksa.*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar-check"></i>
                 <p>Jadwal Periksa</p>
               </a>
             </li>
+
             <li class="nav-item">
-              <a href="{{ route('riwayat-pasien.index') }}" class="nav-link {{ request()->routeIs('riwayat-pasien.*') ? 'active' : '' }}">
+              <a href="{{ route('periksa-pasien.index') }}" class="nav-link {{ request()->routeIs('periksa-pasien.*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-stethoscope"></i>
+                <p>Periksa Pasien</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('dokter.riwayat-pasien.index') }}" class="nav-link {{ request()->routeIs('dokter.riwayat-pasien.*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-history"></i>
                 <p>Riwayat Pasien</p>
               </a>
