@@ -103,14 +103,15 @@
           @endif
 
           <!-- Logout -->
+          <!-- Logout -->
           <li class="nav-item">
-            <form method="POST" action="/logout">
-              @csrf
-              <button type="submit" class="nav-link btn btn-danger text-left w-100">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>Keluar</p>
-              </button>
-            </form>
+              <form method="POST" action="/logout">
+                  @csrf
+                  <button type="submit" class="nav-link btn btn-danger text-left w-100">
+                      <i class="nav-icon fas fa-sign-out-alt"></i>
+                      <p>Keluar</p>
+                  </button>
+              </form>
           </li>
         </ul>
       </nav>

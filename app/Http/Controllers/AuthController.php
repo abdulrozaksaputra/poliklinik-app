@@ -85,6 +85,8 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
+
+
     public function dokter(){
         $data = Poli::with ('dokters')->get();
         return $data;
